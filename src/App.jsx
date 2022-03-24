@@ -1,55 +1,37 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Input from './UI/Input/Input';
-import Button from './UI/Button/Button';
-import PostList from './Components/PostList';
+import { BrowserRouter} from 'react-router-dom';
+// import 'bootstrap/dist/css/bootstrap.css'
 
-
-function App() {
-
-    const [value, setValue] = useState({title: '', body: ''})
-    const [post, setPost] = useState([{
-        main: 'qqqqq',
-        dop: 'uy768',
-        id: 560534
-    },{
-        main: 'df',
-        dop: 'sda',
-        id: 1010101
-    }])
-
+import Navbar from './Navbar/Navbar';
+import AppRouter from './Components/AppRouter';
+import { AuthContext } from './context/context';
+const App = () => {
     
+    const [isAuth, setIsAuth] = useState(false)
 
-    const Drow = (e) => {
-        e.preventDefault()
-        const newPost = {
-            main: value.title,
-            dop: value.body,
-            id: new Date().getMilliseconds()
+    useEffect(() => {
+        if(localStorage.getItem('auth')){
+            setIsAuth(true)
         }
-        setPost([...post, newPost])
-        setValue ({title: '', body: ''})
-    }
+    }, [])
 
-    const removePost = (id) => {
-        setPost(post.filter(i => i.id !== id))
-    }
+    return (
+        
+        < AuthContext.Provider value = {{
+            isAuth,
+            setIsAuth
+        }} > 
 
-    return ( 
-        <div className = "App">
-          
-
-            
-            <form onSubmit={ value.title !== '' && value.body !== '' ? Drow : (e) => e.preventDefault() } > 
-            <Input value = {value.title} setValue = {e => setValue({...value, title: e.target.value})} />
-            <Input value = {value.body} setValue = {e => setValue({...value, body: e.target.value})} />
-            <Button/>
-          <PostList post = {post} removePost = {removePost} setPost = {setPost}/>
-            </form>
-          
-        </div>
-    );
-}
+        <BrowserRouter>
+        <Navbar/>
+        <AppRouter/>
+        </BrowserRouter> 
+        </AuthContext.Provider>
+       
+    
+      
+    )
+};
 
 export default App;

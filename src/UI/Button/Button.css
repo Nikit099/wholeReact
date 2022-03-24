@@ -3,4 +3,10 @@ button {
     background-color: blueviolet;
     color: rgb(245, 255, 232);
     height: 30px;
+    transition: 0.5s;
+}
+
+button:hover {
+    border: 2px solid rgb(54, 26, 82);
+    background-color: rgb(80, 22, 134);
 }

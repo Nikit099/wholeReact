@@ -4,13 +4,13 @@ const PostList = ({post, removePost, setPost}) => {
 
     // const [firstElem, setfirstElem] = useState(null)
     // const [twoElem, setTwoElem] = useState(null)
-
+    
     // const dragStart = (e) => {
     //     setfirstElem(e.target)
     //     setTimeout(()=> {
     //         e.target.style.opacity = '0'
     //     }, 0)
-        
+
     // }   
     // const drop = (e) => {
     //     e.preventDefault()
@@ -20,7 +20,7 @@ const PostList = ({post, removePost, setPost}) => {
     //     e.target.parentElement.innerHTML = ''
     //     e.target.parentElement.innerHTML = firstElem
     //     console.log(e);
-       
+
     // }
 
     // const dragEnd = (e) => {
@@ -31,7 +31,7 @@ const PostList = ({post, removePost, setPost}) => {
 
     //     // e.target.remove()
 
-        
+
     // }
 
     // const dragOver = (e) => {
@@ -44,7 +44,11 @@ const PostList = ({post, removePost, setPost}) => {
     //     e.target.style.background = 'rgb(36, 36, 36)'
         
     // }
-
+    if(!post.length){
+        return(
+            <h1>Нет постов!!!</h1>
+        )
+    }
  
 
     return (
@@ -53,8 +57,8 @@ const PostList = ({post, removePost, setPost}) => {
                 <Post setPost = {setPost} 
                 post = {post}
                 i = {i} 
-                title = {i.main}
-                body = {i.dop}
+                title = {i.title}
+                body = {i.body}
                 id = {i.id}
                 key ={i.id}  
                 removePost = {removePost}
